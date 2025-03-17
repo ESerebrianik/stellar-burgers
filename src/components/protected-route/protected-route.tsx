@@ -14,7 +14,7 @@ export function ProtectedRoute({ children, isPublic }: ProtectedRouteProps) {
   const user = useSelector(getUserData);
   const checkUser = useSelector(isAuthChecked);
 
-  if (!checkUser && user !== null) {
+  if (!checkUser) {
     return <Preloader />;
   }
 
