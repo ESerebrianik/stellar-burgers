@@ -1,5 +1,5 @@
 import { setCookie, getCookie } from './cookie';
-import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+import { TIngridient, TOrder, TOrdersData, TUser } from './types';
 
 const URL = process.env.BURGER_API_URL;
 
@@ -38,27 +38,34 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
 export const fetchWithRefresh = async <T>(
   url: RequestInfo,
   options: RequestInit
-) => {
+): Promise<T> => {
   try {
     const res = await fetch(url, options);
-    return await checkResponse<T>(res);
-  } catch (err) {
-    if ((err as { message: string }).message === 'jwt expired') {
+
+    if (res.status === 401) {
+      // Токен мог протухнуть
       const refreshData = await refreshToken();
+
+      // Обновляем токен в заголовках
       if (options.headers) {
         (options.headers as { [key: string]: string }).authorization =
           refreshData.accessToken;
       }
-      const res = await fetch(url, options);
-      return await checkResponse<T>(res);
-    } else {
-      return Promise.reject(err);
+
+      // Повторяем оригинальный запрос с новым токеном
+      const retryRes = await fetch(url, options);
+      return await checkResponse<T>(retryRes);
     }
+
+    return await checkResponse<T>(res);
+  } catch (err) {
+    console.error('fetchWithRefresh error:', err);
+    return Promise.reject(err);
   }
 };
 
-type TIngredientsResponse = TServerResponse<{
-  data: TIngredient[];
+type TIngridientsResponse = TServerResponse<{
+  data: TIngridient[];
 }>;
 
 type TFeedsResponse = TServerResponse<{
@@ -71,9 +78,9 @@ type TOrdersResponse = TServerResponse<{
   data: TOrder[];
 }>;
 
-export const getIngredientsApi = () =>
+export const getIngridientsApi = () =>
   fetch(`${URL}/ingredients`)
-    .then((res) => checkResponse<TIngredientsResponse>(res))
+    .then((res) => checkResponse<TIngridientsResponse>(res))
     .then((data) => {
       if (data?.success) return data.data;
       return Promise.reject(data);
@@ -112,7 +119,7 @@ export const orderBurgerApi = (data: string[]) =>
       authorization: getCookie('accessToken')
     } as HeadersInit,
     body: JSON.stringify({
-      ingredients: data
+      ingridients: data
     })
   }).then((data) => {
     if (data?.success) return data;
@@ -218,7 +225,7 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
+      authorization: `Bearer ${getCookie('accessToken')}`
     } as HeadersInit,
     body: JSON.stringify(user)
   });

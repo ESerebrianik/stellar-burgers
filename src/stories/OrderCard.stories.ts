@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultOrderCard: Story = {
   args: {
     orderInfo: {
-      ingredientsInfo: [
+      ingridientsInfo: [
         {
           _id: '111',
           name: 'Булка',
@@ -33,7 +33,7 @@ export const DefaultOrderCard: Story = {
           image_mobile: ''
         }
       ],
-      ingredientsToShow: [
+      ingridientsToShow: [
         {
           _id: '111',
           name: 'Булка',
@@ -70,9 +70,9 @@ export const DefaultOrderCard: Story = {
       createdAt: '',
       updatedAt: '',
       number: 3,
-      ingredients: ['Булка', 'Начинка']
+      ingridients: ['Булка', 'Начинка']
     },
-    maxIngredients: 5,
+    maxIngridients: 5,
     locationState: {
       background: {
         hash: '',

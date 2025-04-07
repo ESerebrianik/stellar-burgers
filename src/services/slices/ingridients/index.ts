@@ -1,44 +1,44 @@
-import { getIngredientsApi } from '@api';
+import { getIngridientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { TIngredient } from '../../../utils/types';
+import { TIngridient } from '../../../utils/types';
 
-type TIngredientState = {
+type TIngridientState = {
   isLoading: boolean;
-  ingredients: TIngredient[];
+  ingridients: TIngridient[];
 };
 
-const initialState: TIngredientState = {
+export const initialState: TIngridientState = {
   isLoading: false,
-  ingredients: []
+  ingridients: []
 };
 
-export const getIngredients = createAsyncThunk(
-  'ingredients/getIngredients',
-  async () => await getIngredientsApi()
+export const getIngridients = createAsyncThunk(
+  'ingridients/getIngridients',
+  async () => await getIngridientsApi()
 );
 
 export const slice = createSlice({
-  name: 'ingredients',
+  name: 'ingridients',
   initialState,
   reducers: {},
   selectors: {
-    getAllIngredients: (state) => state.ingredients,
-    getIngredientsIsLoading: (state) => state.isLoading
+    getAllIngridients: (state) => state.ingridients,
+    getIngridientsIsLoading: (state) => state.isLoading
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getIngredients.pending, (state) => {
+      .addCase(getIngridients.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getIngredients.fulfilled, (state, action) => {
+      .addCase(getIngridients.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.ingredients = action.payload;
+        state.ingridients = action.payload;
       })
-      .addCase(getIngredients.rejected, (state) => {
+      .addCase(getIngridients.rejected, (state) => {
         state.isLoading = false;
       });
   }
 });
 
-export const { getAllIngredients, getIngredientsIsLoading } = slice.selectors;
-export default slice.reducer;
+export const { getAllIngridients, getIngridientsIsLoading } = slice.selectors;
+export const ingridientsReducer = slice.reducer;

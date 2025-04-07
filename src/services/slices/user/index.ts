@@ -134,6 +134,9 @@ const slice = createSlice({
         state.error = action.meta.rejectedWithValue
           ? (action.payload as SerializedError)
           : action.error;
+        state.isAuthChecked = true; // <--- вот эта строка обязательна!
+        state.isAuthenticated = false;
+        state.data = null;
         state.RequestStatus = RequestStatus.Failed;
       });
     builder
@@ -186,4 +189,4 @@ export const {
   getError
 } = slice.selectors;
 export const { setUser } = slice.actions;
-export default slice.reducer;
+export const userReducer = slice.reducer;

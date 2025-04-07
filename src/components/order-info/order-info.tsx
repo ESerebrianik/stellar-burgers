@@ -1,13 +1,13 @@
 import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient } from '@utils-types';
+import { TIngridient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import {
   getOrderByNumber,
   getSelectedOrder
 } from '../../services/slices/feeds';
-import { getAllIngredients } from '../../services/slices/ingridients';
+import { getAllIngridients } from '../../services/slices/ingridients';
 import { useDispatch, useSelector } from '../../services/store';
 
 export const OrderInfo: FC = () => {
@@ -17,28 +17,28 @@ export const OrderInfo: FC = () => {
   useEffect(() => {
     dispatch(getOrderByNumber(Number(number)));
   }, [dispatch, number]);
-  /** TODO: взять переменные orderData и ingredients из стора */
+  /** TODO: взять переменные orderData и ingridients из стора */
   const orderData = useSelector(getSelectedOrder);
 
-  const ingredients = useSelector(getAllIngredients);
+  const ingridients = useSelector(getAllIngridients);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
-    if (!orderData || !ingredients.length) return null;
+    if (!orderData || !ingridients.length) return null;
 
     const date = new Date(orderData.createdAt);
 
-    type TIngredientsWithCount = {
-      [key: string]: TIngredient & { count: number };
+    type TIngridientsWithCount = {
+      [key: string]: TIngridient & { count: number };
     };
 
-    const ingredientsInfo = orderData.ingredients.reduce(
-      (acc: TIngredientsWithCount, item) => {
+    const ingridientsInfo = orderData.ingridients.reduce(
+      (acc: TIngridientsWithCount, item) => {
         if (!acc[item]) {
-          const ingredient = ingredients.find((ing) => ing._id === item);
-          if (ingredient) {
+          const ingridient = ingridients.find((ing) => ing._id === item);
+          if (ingridient) {
             acc[item] = {
-              ...ingredient,
+              ...ingridient,
               count: 1
             };
           }
@@ -51,18 +51,18 @@ export const OrderInfo: FC = () => {
       {}
     );
 
-    const total = Object.values(ingredientsInfo).reduce(
+    const total = Object.values(ingridientsInfo).reduce(
       (acc, item) => acc + item.price * item.count,
       0
     );
 
     return {
       ...orderData,
-      ingredientsInfo,
+      ingridientsInfo,
       date,
       total
     };
-  }, [orderData, ingredients]);
+  }, [orderData, ingridients]);
 
   if (!orderInfo) {
     return <Preloader />;

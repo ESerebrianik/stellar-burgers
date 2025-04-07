@@ -1,4 +1,4 @@
-export type TIngredient = {
+export type TIngridient = {
   _id: string;
   name: string;
   type: string;
@@ -12,7 +12,7 @@ export type TIngredient = {
   image_mobile: string;
 };
 
-export type TConstructorIngredient = TIngredient & {
+export type TConstructorIngridient = TIngridient & {
   id: string;
 };
 
@@ -23,7 +23,7 @@ export type TOrder = {
   createdAt: string;
   updatedAt: string;
   number: number;
-  ingredients: string[];
+  ingridients: string[];
 };
 
 export type TOrdersData = {

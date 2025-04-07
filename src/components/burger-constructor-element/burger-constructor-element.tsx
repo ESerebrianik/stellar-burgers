@@ -8,7 +8,7 @@ import {
 } from '../../services/slices/builder';
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
-  ({ ingredient, index, totalItems }) => {
+  ({ ingridient, index, totalItems }) => {
     const dispatch = useDispatch();
     const handleMoveDown = () => {
       dispatch(reorderConstructor({ from: index, to: index + 1 }));
@@ -19,12 +19,12 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     };
 
     const handleClose = () => {
-      dispatch(removeFromConstructor(Number(ingredient.id)));
+      dispatch(removeFromConstructor(Number(ingridient.id)));
     };
 
     return (
       <BurgerConstructorElementUI
-        ingredient={ingredient}
+        ingridient={ingridient}
         index={index}
         totalItems={totalItems}
         handleMoveUp={handleMoveUp}

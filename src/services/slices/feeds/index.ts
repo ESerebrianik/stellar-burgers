@@ -19,12 +19,12 @@ export const initialState: TFeedsState = {
 };
 
 export const getFeeds = createAsyncThunk(
-  'ingredients/getFeeds',
+  'ingridients/getFeeds',
   async () => await getFeedsApi()
 );
 
 export const getOrderByNumber = createAsyncThunk(
-  'ingredients/fetchFeeds',
+  'ingridients/fetchFeeds',
   async (number: number) => await getOrderByNumberApi(number)
 );
 
@@ -71,4 +71,4 @@ export const {
   getIsLoading
 } = slice.selectors;
 export const { clearSelectedOrder } = slice.actions;
-export default slice.reducer;
+export const feedReducer = slice.reducer;

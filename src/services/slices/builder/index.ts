@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { TConstructorIngredient, TIngredient } from '../../../utils/types';
+import { TConstructorIngridient, TIngridient } from '../../../utils/types';
 
 export type TConstructorState = {
-  bun: TIngredient | null;
-  ingredients: TConstructorIngredient[];
+  bun: TIngridient | null;
+  ingridients: TConstructorIngridient[];
 };
 
 export const initialState: TConstructorState = {
   bun: null,
-  ingredients: []
+  ingridients: []
 };
 
 export const slice = createSlice({
@@ -17,28 +17,28 @@ export const slice = createSlice({
   initialState,
   reducers: {
     addToConstructor: {
-      reducer: (state, { payload }: PayloadAction<TConstructorIngredient>) => {
+      reducer: (state, { payload }: PayloadAction<TConstructorIngridient>) => {
         if (payload.type === 'bun') {
           state.bun = payload;
         } else {
-          state.ingredients.push(payload);
+          state.ingridients.push(payload);
         }
       },
-      prepare: (ingredient: TIngredient) => ({
-        payload: { ...ingredient, id: uuidv4() }
+      prepare: (ingridient: TIngridient) => ({
+        payload: { ...ingridient, id: uuidv4() }
       })
     },
     removeFromConstructor: (state, { payload }: PayloadAction<number>) => {
-      state.ingredients.splice(payload, 1);
+      state.ingridients.splice(payload, 1);
     },
     reorderConstructor: (
       state,
       { payload }: PayloadAction<{ from: number; to: number }>
     ) => {
       const { from, to } = payload;
-      const ingredients = [...state.ingredients];
-      ingredients.splice(to, 0, ingredients.splice(from, 1)[0]);
-      state.ingredients = ingredients;
+      const ingridients = [...state.ingridients];
+      ingridients.splice(to, 0, ingridients.splice(from, 1)[0]);
+      state.ingridients = ingridients;
     },
     resetConstructor: () => initialState
   }
@@ -50,4 +50,4 @@ export const {
   reorderConstructor,
   resetConstructor
 } = slice.actions;
-export default slice.reducer;
+export const builderReducer = slice.reducer;
