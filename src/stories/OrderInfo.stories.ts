@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultOrderInfo: Story = {
   args: {
     orderInfo: {
-      ingridientsInfo: {
+      ingredientsInfo: {
         bun: {
           _id: '211',
           name: 'Булка',
@@ -42,7 +42,7 @@ export const DefaultOrderInfo: Story = {
       createdAt: '',
       updatedAt: '',
       number: 2,
-      ingridients: ['Булка', 'Начинка']
+      ingredients: ['Булка', 'Начинка']
     }
   }
 };

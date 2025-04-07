@@ -6,7 +6,7 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
 import { BurgerConstructorUIProps } from './type';
-import { TConstructorIngridient } from '@utils-types';
+import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorElement, Modal } from '@components';
 import { Preloader, OrderDetailsUI } from '@ui';
 
@@ -37,13 +37,13 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </div>
     )}
     <ul className={styles.elements}>
-      {constructorItems.ingridients.length > 0 ? (
-        constructorItems.ingridients.map(
-          (item: TConstructorIngridient, index: number) => (
+      {constructorItems.ingredients.length > 0 ? (
+        constructorItems.ingredients.map(
+          (item: TConstructorIngredient, index: number) => (
             <BurgerConstructorElement
-              ingridient={item}
+              ingredient={item}
               index={index}
-              totalItems={constructorItems.ingridients.length}
+              totalItems={constructorItems.ingredients.length}
               key={item.id}
             />
           )

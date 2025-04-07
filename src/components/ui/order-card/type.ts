@@ -1,15 +1,15 @@
 import { Location } from 'react-router-dom';
-import { TIngridient } from '@utils-types';
+import { TIngredient } from '@utils-types';
 
 export type OrderCardUIProps = {
   orderInfo: TOrderInfo;
-  maxIngridients: number;
+  maxIngredients: number;
   locationState: { background: Location };
 };
 
 type TOrderInfo = {
-  ingridientsInfo: TIngridient[];
-  ingridientsToShow: TIngridient[];
+  ingredientsInfo: TIngredient[];
+  ingredientsToShow: TIngredient[];
   remains: number;
   total: number;
   date: Date;
@@ -19,5 +19,5 @@ type TOrderInfo = {
   createdAt: string;
   updatedAt: string;
   number: number;
-  ingridients: string[];
+  ingredients: string[];
 };

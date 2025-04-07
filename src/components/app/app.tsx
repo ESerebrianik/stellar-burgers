@@ -11,7 +11,7 @@ import {
 } from '@pages';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
-import { IngridientDetails } from '../ingridient-details';
+import { IngredientDetails } from '../ingredient-details';
 import '../../index.css';
 import styles from './app.module.css';
 import {
@@ -22,7 +22,7 @@ import {
   useMatch
 } from 'react-router-dom';
 import { useEffect, useCallback } from 'react';
-import { getIngridients } from '../../services/slices/ingridients';
+import { getIngredients } from '../../services/slices/ingredients';
 import { clearSelectedOrder } from '../../services/slices/feeds';
 import { AppHeader } from '@components';
 import { useDispatch } from '../../services/store';
@@ -40,7 +40,7 @@ const App = () => {
   const orderNumber = profileMatch || feedMatch;
 
   useEffect(() => {
-    dispatch(getIngridients());
+    dispatch(getIngredients());
     dispatch(getUser());
   }, [dispatch]);
 
@@ -73,7 +73,7 @@ const App = () => {
           }
         />
         <Route
-          path='/ingridients/:id'
+          path='/ingredients/:id'
           element={
             <div className={styles.detailPageWrap}>
               <p
@@ -81,7 +81,7 @@ const App = () => {
               >
                 Детали ингредиента
               </p>
-              <IngridientDetails />
+              <IngredientDetails />
             </div>
           }
         />
@@ -165,10 +165,10 @@ const App = () => {
             }
           />
           <Route
-            path='/ingridients/:id'
+            path='/ingredients/:id'
             element={
               <Modal title={'Детали ингредиента'} onClose={handleModalClose}>
-                <IngridientDetails />
+                <IngredientDetails />
               </Modal>
             }
           />

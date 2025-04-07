@@ -23,7 +23,6 @@ export const Feed: FC = () => {
   if (isLoading) {
     return <Preloader />;
   }
-  console.log('orders', orders);
   return (
     <FeedUI
       orders={orders}

@@ -7,7 +7,7 @@ import { MoveButton } from '@zlden/react-developer-burger-ui-components';
 export const BurgerConstructorElementUI: FC<BurgerConstructorElementUIProps> =
   memo(
     ({
-      ingridient,
+      ingredient,
       index,
       totalItems,
       handleMoveUp,
@@ -23,9 +23,9 @@ export const BurgerConstructorElementUI: FC<BurgerConstructorElementUIProps> =
         />
         <div className={`${styles.element_fullwidth} ml-2`}>
           <ConstructorElement
-            text={ingridient.name}
-            price={ingridient.price}
-            thumbnail={ingridient.image}
+            text={ingredient.name}
+            price={ingredient.price}
+            thumbnail={ingredient.image}
             handleClose={handleClose}
           />
         </div>

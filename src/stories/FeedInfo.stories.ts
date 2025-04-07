@@ -26,7 +26,7 @@ export const DefaultFeedInfo: Story = {
           createdAt: '',
           updatedAt: '',
           number: 123,
-          ingridients: ['Булка', 'Начинка']
+          ingredients: ['Булка', 'Начинка']
         }
       ],
       total: 12,

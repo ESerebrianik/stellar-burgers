@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TConstructorIngridient } from '@utils-types';
+import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI, Preloader } from '@ui';
 import { resetConstructor } from '../../services/slices/builder';
 import {
@@ -33,7 +33,7 @@ export const BurgerConstructor: FC = () => {
     }
     const data = [
       constructorItems.bun._id,
-      ...constructorItems.ingridients.map((ingridient) => ingridient._id),
+      ...constructorItems.ingredients.map((ingredient) => ingredient._id),
       constructorItems.bun._id
     ];
     dispatch(createOrder(data));
@@ -47,8 +47,8 @@ export const BurgerConstructor: FC = () => {
   const price = useMemo(
     () =>
       (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +
-      constructorItems.ingridients.reduce(
-        (s: number, v: TConstructorIngridient) => s + v.price,
+      constructorItems.ingredients.reduce(
+        (s: number, v: TConstructorIngredient) => s + v.price,
         0
       ),
     [constructorItems]

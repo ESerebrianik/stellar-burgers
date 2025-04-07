@@ -11,7 +11,7 @@ import { OrderCardUIProps } from './type';
 import { OrderStatus } from '@components';
 
 export const OrderCardUI: FC<OrderCardUIProps> = memo(
-  ({ orderInfo, maxIngridients, locationState }) => (
+  ({ orderInfo, maxIngredients, locationState }) => (
     <Link
       to={orderInfo.number.toString()}
       relative='path'
@@ -33,9 +33,9 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
         <OrderStatus status={orderInfo.status} />
       )}
       <div className={`pt-6 ${styles.order_content}`}>
-        <ul className={styles.ingridients}>
-          {orderInfo.ingridientsToShow.map((ingridient, index) => {
-            let zIndex = maxIngridients - index;
+        <ul className={styles.ingredients}>
+          {orderInfo.ingredientsToShow.map((ingredient, index) => {
+            let zIndex = maxIngredients - index;
             let right = 20 * index;
             return (
               <li
@@ -46,15 +46,15 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
                 <img
                   style={{
                     opacity:
-                      orderInfo.remains && maxIngridients === index + 1
+                      orderInfo.remains && maxIngredients === index + 1
                         ? '0.5'
                         : '1'
                   }}
                   className={styles.img}
-                  src={ingridient.image_mobile}
-                  alt={ingridient.name}
+                  src={ingredient.image_mobile}
+                  alt={ingredient.name}
                 />
-                {maxIngridients === index + 1 ? (
+                {maxIngredients === index + 1 ? (
                   <span
                     className={`text text_type_digits-default ${styles.remains}`}
                   >

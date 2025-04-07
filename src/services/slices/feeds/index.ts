@@ -19,12 +19,12 @@ export const initialState: TFeedsState = {
 };
 
 export const getFeeds = createAsyncThunk(
-  'ingridients/getFeeds',
+  'ingredients/getFeeds',
   async () => await getFeedsApi()
 );
 
 export const getOrderByNumber = createAsyncThunk(
-  'ingridients/fetchFeeds',
+  'ingredients/fetchFeeds',
   async (number: number) => await getOrderByNumberApi(number)
 );
 

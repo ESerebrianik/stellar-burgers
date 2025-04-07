@@ -18,9 +18,9 @@ export const initialState: TOrdersState = {
 
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
-  async (ingridients: string[], { rejectWithValue }) => {
+  async (ingredients: string[], { rejectWithValue }) => {
     try {
-      const response = await orderBurgerApi(ingridients);
+      const response = await orderBurgerApi(ingredients);
       return { order: response.order, name: response.name };
     } catch (error: any) {
       return rejectWithValue(error.message);

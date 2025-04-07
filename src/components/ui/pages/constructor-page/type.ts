@@ -1,3 +1,3 @@
 export type ConstructorPageUIProps = {
-  isIngridientsLoading: boolean;
+  isIngredientsLoading: boolean;
 };
