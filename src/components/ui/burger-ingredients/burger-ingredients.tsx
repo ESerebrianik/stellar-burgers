@@ -30,6 +30,7 @@ export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
               value='main'
               active={currentTab === 'main'}
               onClick={onTabClick}
+              data-cy='tab-fillings'
             >
               Начинки
             </Tab>
