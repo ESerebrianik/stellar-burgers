@@ -23,7 +23,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultIngredient: Story = {
+export const DefaulTIngredient: Story = {
   args: {
     ingredient: {
       _id: '111',
